@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Engine -->
+    <title>Escape Room Graz & Klagenfurt | Riddle Room</title>
+    <meta name="description" content="Erlebe die besten Escape Rooms in Graz & Klagenfurt. Rätselspaß für Teams, Familien & Firmen. Jetzt Abenteuer bei Riddle Room buchen!">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="Riddle Room.jpg">
+    
+    <!-- Design System Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-dark: #0a0a0c;
+            --bg-card: #121216;
+            --primary: #d4af37;
+            --primary-hover: #f3cf55;
+            --text-light: #f5f5f7;
+            --text-muted: #a0a0ab;
+            --accent-red: #8b0000;
+            --font-display: 'Cinzel', serif;
+            --font-body: 'Montserrat', sans-serif;
+            --transition-smooth: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+        }
+
+        a:hover {
+            color: var(--primary-hover);
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        /* Hardware-Accelerated Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            will-change: transform, opacity;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scale-up {
+            opacity: 0;
+            transform: scale(0.9);
+            will-change: transform, opacity;
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .scale-up.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Typography */
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--text-light);
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.9rem;
+            margin-bottom: 4rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(10, 10, 12, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 45px;
+            height: 45px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 1px solid var(--primary);
+        }
+
+        .logo-text {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-light);
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Section 1: Hero Scene */
+        #hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1rem;
+            background: radial-gradient(circle at center, rgba(18, 18, 22, 0.1) 0%, rgba(10, 10, 12, 1) 100%);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('Riddle room2.jpg') no-repeat center center/cover;
+            opacity: 0.25;
+            transform: scale(1.05);
+            animation: pulseZoom 25s infinite alternate linear;
+            z-index: -1;
+        }
+
+        @keyframes pulseZoom {
+            0% { transform: scale(1.05); }
+            100% { transform: scale(1.15) translate(-1%, -1%); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            z-index: 2;
+        }
+
+        .hero-tagline {
+            font-size: 1.1rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 6px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: clamp(2.3rem, 5.5vw, 4.5rem);
+            line-height: 1.2;
+            margin-bottom: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .hero-title span {
+            color: var(--primary);
+            display: block;
+            font-size: clamp(1.3rem, 3.5vw, 2.3rem);
+            margin-top: 0.8rem;
+        }
+
+        .btn-primary {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--text-light);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--primary);
+            transition: var(--transition-smooth);
+            z-index: -1;
+        }
+
+        .btn-primary:hover::before { left: 0; }
+        .btn-primary:hover { color: var(--bg-dark); box-shadow: 0 0 30px rgba(212, 175, 55, 0.5); }
+
+        section {
+            padding: 120px 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Section 2: About Us Grid Fragmented */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1.8rem;
+        }
+
+        .about-paragraph {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .about-highlight {
+            background: var(--bg-card);
+            border-left: 4px solid var(--primary);
+            padding: 2rem;
+            border-radius: 4px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+
+        .about-image-wrapper {
+            position: relative;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 12px;
+            background: rgba(18, 18, 22, 0.5);
+        }
+
+        .about-img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            filter: grayscale(20%) contrast(105%);
+        }
+
+        /* Section 3: Why Visit (Vorteile) */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .benefit-card {
+            background: var(--bg-card);
+            padding: 3.5rem 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 3px;
+            background: var(--primary);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition-smooth);
+        }
+
+        .benefit-card:hover::before { transform: scaleX(1); }
+        .benefit-card:hover { transform: translateY(-10px); border-color: rgba(212, 175, 55, 0.2); box-shadow: 0 20px 40px rgba(0,0,0,0.6); }
+
+        .benefit-number {
+            font-family: var(--font-display);
+            font-size: 2.8rem;
+            color: rgba(212, 175, 55, 0.12);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .benefit-title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .benefit-desc {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* Atmosphere Quote Components */
+        .quote-panel {
+            padding: 140px 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.15);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+            width: 100vw;
+            position: relative;
+            left: 50%; right: 50%;
+            margin-left: -50vw; margin-right: -50vw;
+            background-attachment: fixed;
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .quote-panel.first-quote { background-image: linear-gradient(rgba(10,10,12,0.92), rgba(10,10,12,0.92)), url('investigating.jpg'); }
+        .quote-panel.second-quote { background-image: linear-gradient(rgba(10,10,12,0.92), rgba(10,10,12,0.92)), url('game.jpg'); }
+
+        .quote-text {
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 2.8vw, 2.2rem);
+            color: var(--text-light);
+            max-width: 950px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.5;
+            font-style: italic;
+        }
+
+        .quote-author {
+            color: var(--primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.95rem;
+        }
+
+        /* Section 5: Gallery Grid System */
+        .mosaic-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-rows: 240px;
+            gap: 1.2rem;
+        }
+
+        .mosaic-item {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.03);
+            border-radius: 4px;
+        }
+
+        .mosaic-item img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            transition: var(--transition-smooth);
+            filter: grayscale(35%) brightness(85%);
+        }
+
+        .mosaic-item::after {
+            content: 'Riddle Room';
+            font-family: var(--font-display);
+            font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 10, 12, 0.85);
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; transition: var(--transition-smooth); color: var(--primary);
+        }
+
+        .mosaic-item:hover img { transform: scale(1.08); filter: grayscale(0%) brightness(100%); }
+        .mosaic-item:hover::after { opacity: 1; }
+
+        .m-tall { grid-row: span 2; }
+        .m-wide { grid-column: span 2; }
+
+        /* Section 6: Rooms Presentation */
+        .showcase-container {
+            display: flex;
+            flex-direction: column;
+            gap: 7rem;
+        }
+
+        .room-segment {
+            display: grid;
+            grid-template-columns: 1.25fr 0.75fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .room-segment:nth-child(even) { grid-template-columns: 0.75fr 1.25fr; }
+        .room-segment:nth-child(even) .room-visual-container { grid-column: 2; }
+        .room-segment:nth-child(even) .room-content-container { grid-column: 1; }
+
+        .room-visual-container {
+            position: relative;
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+        }
+
+        .room-display-img {
+            width: 100%;
+            height: 460px;
+            object-fit: cover;
+            display: block;
+            transition: var(--transition-smooth);
+        }
+
+        .room-visual-container:hover .room-display-img { transform: scale(1.03); }
+
+        .room-loc-badge {
+            position: absolute;
+            top: 25px; left: 25px;
+            background: var(--accent-red);
+            padding: 0.5rem 1.4rem;
+            font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+
+        .room-content-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.4rem;
+        }
+
+        .room-specs {
+            display: flex;
+            gap: 1.5rem;
+            font-size: 0.85rem; font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+
+        .room-specs span {
+            background: rgba(212, 175, 55, 0.08);
+            padding: 5px 12px;
+            border-radius: 3px;
+        }
+
+        .room-name-title {
+            font-family: var(--font-display);
+            font-size: 2.4rem;
+            text-transform: uppercase;
+        }
+
+        .room-text-info {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.75;
+            text-align: justify;
+        }
+
+        .room-action-link {
+            align-self: flex-start;
+            margin-top: 1rem;
+            font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 2px;
+            border-bottom: 2px solid var(--primary);
+            padding-bottom: 5px;
+        }
+
+        .room-action-link:hover { letter-spacing: 3px; border-bottom-color: var(--primary-hover); }
+
+        /* Section 8: Mission & Vision */
+        .dna-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3.5rem;
+        }
+
+        .dna-card {
+            background: linear-gradient(150deg, #121216 0%, #09090c 100%);
+            padding: 4rem;
+            border: 1px solid rgba(255,255,255,0.01);
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .dna-card::after {
+            content: '';
+            position: absolute; bottom: 0; right: 0; width: 45px; height: 45px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.25);
+            border-right: 2px solid rgba(212, 175, 55, 0.25);
+        }
+
+        .dna-header {
+            font-family: var(--font-display);
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        .dna-body {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        /* Footer System */
+        footer {
+            background: #050507;
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
+            padding: 60px 2rem;
+            margin-top: 100px;
+        }
+
+        .footer-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.5rem;
+            text-align: center;
+        }
+
+        .footer-branding {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-logo-img {
+            width: 65px; height: 65px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 1px solid var(--primary);
+        }
+
+        .footer-navigation-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .social-network-matrix {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .social-network-token {
+            width: 45px; height: 45px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.04);
+            display: flex; justify-content: center; align-items: center;
+            font-weight: 700; font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: var(--transition-smooth);
+        }
+
+        .social-network-token:hover {
+            color: var(--bg-dark);
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-credits {
+            font-size: 0.8rem;
+            color: #4a4a52;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 968px) {
+            .about-grid, .room-segment, .room-segment:nth-child(even), .dna-grid {
+                grid-template-columns: 1fr !important;
+                gap: 3rem;
+            }
+            .room-segment:nth-child(even) .room-visual-container { grid-column: 1; }
+            .mosaic-grid { grid-template-columns: repeat(2, 1fr); }
+            .nav-menu { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Global Navigation -->
+    <header>
+        <div class="nav-container">
+            <div class="logo-box">
+                <img src="Riddle Room.jpg" alt="Riddle Room Logo" class="logo-img">
+                <span class="logo-text">Riddle Room</span>
+            </div>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#about" class="nav-link">Über Uns</a></li>
+                    <li><a href="#benefits" class="nav-link">Vorteile</a></li>
+                    <li><a href="#portfolio" class="nav-link">Räume</a></li>
+                    <li><a href="#vision" class="nav-link">DNA</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Section 1: Hero Entry Area -->
+    <section id="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <p class="hero-tagline">Das Premium Real-Life Abenteuer</p>
+            <h1 class="hero-title">Bist du bereit für das Unbekannte?<span>60 Minuten. Ein Team. Ein Ziel.</span></h1>
+            <a href="https://www.riddleroom.at/" class="btn-primary">Jetzt Mission Wählen</a>
+        </div>
+    </section>
+
+    <!-- Section 2: About (Über Uns) Section -->
+    <section id="about" class="reveal">
+        <h2 class="section-title">Wer wir sind</h2>
+        <p class="section-subtitle">Die Erfinder des analogen Nervenkitzels</p>
+        <div class="about-grid">
+            <div class="about-text">
+                <p class="about-paragraph">
+                    Willkommen bei <a href="https://www.riddleroom.at/">Riddle Room</a>, dem Premium-Anbieter für immersive Echtzeit-Abenteuer in Österreich. Unsere Welten sind keine simplen Rätselkammern – sie sind detailgetreue Filmsets, die exklusiv dafür gebaut wurden, Teams an ihre logischen Grenzen zu bringen. Jedes Detail, von der Hintergrundstory bis zum kleinsten mechanischen Bauteil, wurde sorgfältig konzipiert.
+                </p>
+                <div class="about-highlight">
+                    Egal ob du die geheimnisvolle Atmosphäre unseres <a href="https://www.riddleroom.at/">Escape Room Graz</a> Setups erleben oder die historischen Geheimnisse in Klagenfurt entschlüsseln willst – Kooperation ist dein einziger Ausweg.
+                </div>
+                <p class="about-paragraph">
+                    Bei uns gibt es keine digitalen Abkürzungen. Nur durch reale Kommunikation, logische Kombination und echtes Vertrauen untereinander lässt sich die tickende Uhr besiegen. Perfekt für Abenteurer, die das Außergewöhnliche suchen.
+                </p>
+            </div>
+            <div class="about-image-wrapper scale-up">
+                <img src="Riddle Room3.jpg" alt="Riddle Room Rätselkulisse" class="about-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Why Visit (Warum uns besuchen) Section -->
+    <section id="benefits" class="reveal">
+        <h2 class="section-title">Das Riddle Room Prinzip</h2>
+        <p class="section-subtitle">Warum unsere Abenteuer Maßstäbe setzen</p>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-number">01</div>
+                <h3 class="benefit-title">Keine Standard-Schlösser</h3>
+                <p class="benefit-desc">Wir setzen auf massiven Kulissenbau, versteckte Magnetmechanismen und elektronische Steuerungen. Jedes gelöste Rätsel öffnet Türen wie von Zauberhand.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-number">02</div>
+                <h3 class="benefit-title">Teambuilding 2.0</h3>
+                <p class="benefit-desc">Unsere Räume sind strategisch so fraktioniert, dass Einzelgänger scheitern. Nur wer Aufgaben effizient aufteilt, entkommt der Festriegelung.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-number">03</div>
+                <h3 class="benefit-title">Multidisziplinär</h3>
+                <p class="benefit-desc">Egal ob mathematische Logik, haptisches Geschick oder visuelle Mustererkennung – bei uns findet jedes Teammitglied seine persönliche Sternstunde.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 4: Atmospheric Quote One -->
+    <div class="quote-panel first-quote reveal">
+        <p class="quote-text">"Die Logik bringt dich von A nach B. Das Vertrauen in dein Team bringt dich zurück in die Freiheit."</p>
+        <p class="quote-author">— Das Spielleiter-Kollektiv</p>
+    </div>
+
+    <!-- Section 5: Extended Structural Gallery Mosaic -->
+    <section id="gallery" class="reveal">
+        <h2 class="section-title">Impressionen & Action</h2>
+        <p class="section-subtitle">Ein Blick hinter die Kulissen unserer Erlebniswelten</p>
+        <div class="mosaic-grid">
+            <div class="mosaic-item m-wide"><img src="indoor-and-outdoor-activities-1.jpg" alt="Indoor und Outdoor Teambuilding"></div>
+            <div class="mosaic-item"><img src="climbing.jpg" alt="Physisches Teambuilding Klettern"></div>
+            <div class="mosaic-item m-tall"><img src="mountain.jpg" alt="Outdoor Erlebnisse"></div>
+            <div class="mosaic-item"><img src="shooting.jpg" alt="Fokus und Präzision"></div>
+            <div class="mosaic-item m-wide"><img src="game.jpg" alt="Spannung pur im Spiel"></div>
+        </div>
+    </section>
+
+    <!-- Section 6: Room Portfolio Presentation -->
+    <section id="portfolio" class="reveal">
+        <h2 class="section-title">Wähle deine Realität</h2>
+        <p class="section-subtitle">Vier immersive Missionen warten auf dein Team</p>
+        <div class="showcase-container">
+            
+            <!-- Room 1: Go West -->
+            <div class="room-segment reveal">
+                <div class="room-visual-container scale-up">
+                    <span class="room-loc-badge">Klagenfurt</span>
+                    <img src="1.jpg" alt="Go West Room" class="room-display-img">
+                </div>
+                <div class="room-content-container">
+                    <div class="room-specs"><span>2-6 Spieler</span><span>60 Min.</span><span>Mittel</span></div>
+                    <h3 class="room-name-title">Go West</h3>
+                    <p class="room-text-info">
+                        Staubige Holzplanken, der Geruch von Abenteuer und ein ungelöster Konflikt im tiefen Westen. In diesem Szenario taucht ihr tief in die Ära der Outlaws und Pioniere ein. Schafft ihr es, die haptischen Holzrätsel zu knacken und den Safe zu leeren, bevor der Sheriff zurückkehrt? Perfekte Atmosphäre für Wild-West-Enthusiasten.
+                    </p>
+                    <a href="https://www.riddleroom.at/raume/go-west" class="room-action-link" target="_blank">Mission starten ➔</a>
+                </div>
+            </div>
+
+            <!-- Room 2: Mission Impossible -->
+            <div class="room-segment reveal">
+                <div class="room-visual-container scale-up">
+                    <span class="room-loc-badge">Klagenfurt</span>
+                    <img src="2.jpg" alt="Mission Impossible Room" class="room-display-img">
+                </div>
+                <div class="room-content-container">
+                    <div class="room-specs"><span>2-6 Spieler</span><span>60 Min.</span><span>Schwer</span></div>
+                    <h3 class="room-name-title">Mission Impossible</h3>
+                    <p class="room-text-info">
+                        Hochmoderne Lasersysteme, biometrische Barrieren und verschlüsselte Mainframes fordern eure Eliteeinheit heraus. Hier ist rein logischer Verstand gefragt. Jeder Fehler triggert das Sicherheitssystem. Nur durch perfekte Aufteilung der Operatives im Raum lässt sich der globale System-Lockdown verhindern.
+                    </p>
+                    <a href="https://www.riddleroom.at/raume/mission-impossible" class="room-action-link" target="_blank">Mission starten ➔</a>
+                </div>
+            </div>
+
+            <!-- Room 3: Diebesgilde -->
+            <div class="room-segment reveal">
+                <div class="room-visual-container scale-up">
+                    <span class="room-loc-badge">Graz</span>
+                    <img src="3.jpg" alt="Diebesgilde Room" class="room-display-img">
+                </div>
+                <div class="room-content-container">
+                    <div class="room-specs"><span>2-6 Spieler</span><span>60 Min.</span><span>Mittel</span></div>
+                    <h3 class="room-name-title">Diebesgilde</h3>
+                    <p class="room-text-info">
+                        Werdet Teil der legendären Bruderschaft im Herzen unseres <a href="https://www.riddleroom.at/">Escape Room Graz</a> Hauptquartiers. Ihr schleicht euch in die privaten Gemächer eines exzentrischen Kunstsammlers. Meistert historische Mechanismen, findet die Geheimgänge und entwendet das Artefakt, ohne Spuren zu hinterlassen.
+                    </p>
+                    <a href="https://www.riddleroom.at/raume/diebesgilde" class="room-action-link" target="_blank">Mission starten ➔</a>
+                </div>
+            </div>
+
+            <!-- Room 4: Das Labor -->
+            <div class="room-segment reveal">
+                <div class="room-visual-container scale-up">
+                    <span class="room-loc-badge">Graz</span>
+                    <img src="4.jpg" alt="Das Labor Room" class="room-display-img">
+                </div>
+                <div class="room-content-container">
+                    <div class="room-specs"><span>2-6 Spieler</span><span>60 Min.</span><span>Experte</span></div>
+                    <h3 class="room-name-title">Das Labor</h3>
+                    <p class="room-text-info">
+                        Die Belüftungsventile sind geschlossen, die Dekontaminations-Warnung blinkt unaufhörlich. Ein biologisches Experiment ist völlig außer Kontrolle geraten. Ihr habt exakt eine Stunde Zeit, um die chemischen Formeln zu kombinieren und das Antivirus zu extrahieren. Unsere komplexeste Herausforderung für absolute Profis.
+                    </p>
+                    <a href="https://www.riddleroom.at/raume/das-labor" class="room-action-link" target="_blank">Mission starten ➔</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Section 7: Atmospheric Quote Two -->
+    <div class="quote-panel second-quote reveal">
+        <p class="quote-text">"Zeit ist keine Konstante. Im Angesicht des Countdowns wird jede Sekunde zur Ewigkeit."</p>
+        <p class="quote-author">— Logistik-Zentrum Zeitmessung</p>
+    </div>
+
+    <!-- Section 8: Mission & Vision -->
+    <section id="vision" class="reveal">
+        <h2 class="section-title">Unsere DNA</h2>
+        <p class="section-subtitle">Die Philosophie hinter den Kulissen von Riddle Room</p>
+        <div class="dna-grid">
+            <div class="dna-card">
+                <h3 class="dna-header">Unsere Mission</h3>
+                <p class="dna-body">
+                    Wir schaffen physische Erlebnisräume, die Menschen im Zeitalter der digitalen Isolation wieder analog zusammenbringen. Durch anspruchsvolles Gamedesign, filmreife Kulissen und psychologisch dichte Spannungsbögen transformieren wir klassische Freizeitaktivitäten in unvergessliche Teamerlebnisse. Wir fordern den menschlichen Intellekt heraus und stärken den Zusammenhalt unter extremen Bedingungen.
+                </p>
+            </div>
+            <div class="dna-card">
+                <h3 class="dna-header">Unsere Vision</h3>
+                <p class="dna-body">
+                    Die qualitative Speerspitze für immersive Freizeitgestaltung und professionelle B2B-Teambuilding-Konzepte in Südösterreich zu sein und zu bleiben. Durch kontinuierliche technische Innovationen, den Einsatz von Augmented Reality Elementen und revolutionäres Storytelling wollen wir die Grenzen zwischen Realität und interaktiver Fiktion für unsere Spieler vollständig auflösen.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Structural Footer Architecture -->
+    <footer>
+        <div class="footer-wrapper">
+            <div class="footer-branding">
+                <img src="Riddle Room.jpg" alt="Riddle Room Corporate Logo" class="footer-logo-img">
+                <h4 class="logo-text" style="font-size: 1.1rem; margin-top: 5px;">Riddle Room Österreich</h4>
+            </div>
+            
+            <ul class="footer-navigation-links">
+                <li><a href="https://www.riddleroom.at/">Offizielle Webseite</a></li>
+                <li><a href="https://www.riddleroom.at/raume/das-labor">Standort Graz</a></li>
+                <li><a href="https://www.riddleroom.at/raume/go-west">Standort Klagenfurt</a></li>
+            </ul>
+
+            <div class="social-network-matrix">
+                <a href="https://www.facebook.com/KlagenfurtEscapeRoom" target="_blank" class="social-network-token" aria-label="Facebook">FB</a>
+                <a href="https://www.instagram.com/riddle.room/" target="_blank" class="social-network-token" aria-label="Instagram">IG</a>
+                <a href="https://www.pinterest.com/riddleroomaustria/" target="_blank" class="social-network-token" aria-label="Pinterest">PIN</a>
+                <a href="https://medium.com/@riddleroomaustria/" target="_blank" class="social-network-token" aria-label="Medium">MED</a>
+                <a href="https://www.youtube.com/@riddleroomaustria" target="_blank" class="social-network-token" aria-label="YouTube">YT</a>
+            </div>
+
+            <p class="footer-credits">&copy; 2026 Riddle Room (Ing. Heinz Katz). Alle Rechte vorbehalten. Technisch optimierte High-Performance Landingpage.</p>
+        </div>
+    </footer>
+
+    <!-- Optimized JavaScript Scroll-Animation Engine -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dynamicElements = document.querySelectorAll(".reveal, .scale-up");
+            
+            const animationOptions = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -40px 0px"
+            };
+
+            const globalObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("active");
+                        observer.unobserve(entry.target); // Save system resources after animation trigger
+                    }
+                });
+            }, animationOptions);
+
+            dynamicElements.forEach(el => globalObserver.observe(el));
+        });
+    </script>
+</body>
+</html>
